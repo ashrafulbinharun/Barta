@@ -19,53 +19,27 @@
                 @csrf
                 {{-- email --}}
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                    <div class="mt-2">
-                        <input id="email" name="email" type="email" autocomplete="email" placeholder="alp.arslan@mail.com" @class([
-                            'block w-full rounded-md border p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6',
-                            'border-red-600 dark:border-red-800' => $errors->has('email'),
-                        ]) required />
-                    </div>
-                    @error('email')
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-input-label for="email">Email Address</x-input-label>
+
+                    <x-input-field type="email" name="email" id="email" autocomplete="email" placeholder="alp.arslan@mail.com" />
+
+                    <x-validation-error :messages="$errors->get('email')" />
                 </div>
 
                 {{-- password --}}
                 <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                        {{-- forgot password --}}
-                        <div class="flex items-center justify-end mt-4">
-                            @if (Route::has('password.request'))
-                                <a class="text-sm text-gray-900 underline hover:text-gray-900" href="{{ route('password.request') }}">
-                                    {{ __('Forgot your password?') }}
-                                </a>
-                            @endif
-                        </div>
-                    </div>
+                    <x-input-label for="password">Password</x-input-label>
 
-                    {{-- password --}}
-                    <div class="mt-2">
-                        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" @class([
-                            'block w-full rounded-md border p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6',
-                            'border-red-600 dark:border-red-800' => $errors->has('password'),
-                        ]) required />
-                    </div>
-                    @error('password')
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-input-field type="password" name="password" id="password" :hasError="$errors->has('password')" />
+
+                    <x-validation-error :messages="$errors->get('password')" />
                 </div>
 
                 {{-- remember me  --}}
                 <div class="block mt-4">
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox" class="text-gray-600 border-gray-300 rounded shadow-sm" name="remember">
-                        <span class="text-sm text-gray-900 ms-2 ">{{ __('Remember me') }}</span>
+                        <span class="text-sm text-gray-900 ms-2">Remember me</span>
                     </label>
                 </div>
 

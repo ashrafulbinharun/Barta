@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class RegisterUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,18 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'username' => ['required', 'string', 'max:30', Rule::unique(User::class, 'username')],
-            'email' => ['required', 'email', Rule::unique(User::class, 'email')],
-            'password' => ['required', 'confirmed', Password::min(6)],
+            'username' => ['required', 'string', 'max:30',
+                Rule::unique(User::class, 'username')->ignore($this->user()->id)],
+            'password' => ['nullable', 'confirmed', Password::min(6)],
+            'bio' => ['required', 'string', 'max:255'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        // Removes the password field if not provided
+        if ( ! $this->filled('password')) {
+            $this->request->remove('password');
+        }
     }
 }

@@ -58,4 +58,9 @@ class User extends Authenticatable
             : 'https://ui-avatars.com/api/?name=' . $this->name,
         );
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'username';
+    }
 }

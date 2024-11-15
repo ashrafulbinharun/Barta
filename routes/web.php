@@ -2,12 +2,31 @@
 
 use App\Http\Controllers\Auth\AuthenticateUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 
-Route::get('/login', [AuthenticateUserController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticateUserController::class, 'store']);
-Route::post('/logout', [AuthenticateUserController::class, 'destroy'])->name('logout');
-Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisterUserController::class, 'store']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthenticateUserController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticateUserController::class, 'store']);
+    Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterUserController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+
+    Route::controller(AvatarController::class)->group(function () {
+        Route::patch('avatar/update', 'update')->name('profile.avatar.update');
+        Route::delete('avatar/delete', 'destroy')->name('profile.avatar.delete');
+    });
+
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('profile/{user}', 'index')->name('profile.index');
+        Route::get('profile/{user}/edit', 'edit')->name('profile.edit');
+        Route::patch('profile/{user}', 'update')->name('profile.update');
+    });
+
+    Route::post('/logout', [AuthenticateUserController::class, 'destroy'])->name('logout');
+});
