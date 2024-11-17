@@ -78,9 +78,6 @@
         <button type="button" class="text-sm font-semibold leading-6 text-gray-900">
             Cancel
         </button>
-        <button type="submit"
-            class="px-3 py-2 text-sm font-semibold text-white bg-gray-900 border-2 border-gray-800 rounded-lg shadow-sm hover:bg-transparent hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-            Save
-        </button>
+        <x-primary-button class="leading-6">Save</x-primary-button>
     </div>
 </form>

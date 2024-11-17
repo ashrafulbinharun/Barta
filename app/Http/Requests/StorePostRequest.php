@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
 
-class UpdateAvatarRequest extends FormRequest
+class StorePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,12 @@ class UpdateAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => [
-                'required',
-                File::image()->max(1024),
+            'content' => ['nullable', 'string', 'required_without:image'],
+            'image' => [
+                'nullable',
+                File::image()->max(2 * 1024),
                 'mimetypes:image/jpeg,image/png,image/jpg',
+                'required_without:content',
             ],
         ];
     }
@@ -34,8 +36,8 @@ class UpdateAvatarRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'avatar' => [
-                'max' => 'Profile avatar must not be greater than 1 mb',
+            'image' => [
+                'max' => 'Post image must not be greater than 2 mb',
             ],
         ];
     }
@@ -43,7 +45,8 @@ class UpdateAvatarRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'avatar' => 'profile avatar',
+            'content' => 'post content',
+            'image' => 'post image',
         ];
     }
 }

@@ -36,7 +36,7 @@ class UpdateProfileRequest extends FormRequest
     protected function prepareForValidation()
     {
         // Removes the password field if not provided
-        if ( ! $this->filled('password')) {
+        if (! $this->filled('password')) {
             $this->request->remove('password');
         }
     }

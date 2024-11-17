@@ -25,4 +25,9 @@
             </a>
         @endif
     </section>
+
+    @foreach ($posts as $post)
+        {{-- Barta Single Post Card --}}
+        @include('post.partials.single-post', ['post' => $post])
+    @endforeach
 @endsection

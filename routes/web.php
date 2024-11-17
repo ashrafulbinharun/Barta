@@ -3,10 +3,12 @@
 use App\Http\Controllers\Auth\AuthenticateUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\GlobalFeedController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', GlobalFeedController::class)->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticateUserController::class, 'create'])->name('login');
@@ -16,6 +18,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::resource('/posts', PostController::class, [
+        'except' => 'index',
+    ]);
 
     Route::controller(AvatarController::class)->group(function () {
         Route::patch('avatar/update', 'update')->name('profile.avatar.update');

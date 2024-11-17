@@ -18,7 +18,7 @@ class AuthenticateUserController extends Controller
     {
         $credentials = $request->validated();
 
-        if ( ! Auth::attempt($credentials, request()->boolean('remember'))) {
+        if (! Auth::attempt($credentials, request()->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => 'Sorry, those credentials do not match',
             ]);

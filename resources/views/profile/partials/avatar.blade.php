@@ -14,19 +14,19 @@
         <div class="col-span-full">
             <div class="flex items-center mt-2 gap-x-3">
                 <div class="relative">
-                    <img :src="avatarPreview || originalAvatar" alt="{{ $user->name }}" class="object-cover rounded-full size-20 ring-2 ring-gray-300" />
+                    <img :src="avatarPreview || originalAvatar" alt="{{ $user->name }}" class="object-cover rounded-full size-16 ring-2 ring-gray-300" />
                 </div>
 
                 <div class="flex items-center">
                     <label for="avatar"
-                        class="inline-flex items-center px-4 py-2 ml-3 text-xs font-semibold tracking-widest text-gray-700 uppercase transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="inline-flex items-center px-4 py-2 ml-3 text-xs font-semibold tracking-wide text-gray-700 uppercase transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100">
                         Choose
                     </label>
 
                     <x-input-field type="file" name="avatar" id="avatar" class="hidden" @change="previewImage($event)" />
 
                     <button type="submit"
-                        class="inline-flex items-center px-4 py-2 ml-3 text-xs font-semibold tracking-widest text-gray-700 uppercase transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="inline-flex items-center px-4 py-2 ml-3 text-xs font-semibold tracking-wide text-gray-700 uppercase transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100">
                         Update
                     </button>
                 </div>
@@ -39,7 +39,7 @@
             @csrf
             @method('DELETE')
             <button type="submit"
-                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-wider text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-md">
                 Delete Current Avatar
             </button>
         </form>
