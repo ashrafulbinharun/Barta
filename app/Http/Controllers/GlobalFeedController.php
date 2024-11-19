@@ -12,6 +12,7 @@ class GlobalFeedController extends Controller
         $searchResults = $request->query('word');
 
         $posts = Post::with('user')
+            ->withCount(['likes', 'comments'])
             ->search($searchResults)
             ->latest()
             ->get();

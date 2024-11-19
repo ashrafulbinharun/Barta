@@ -9,7 +9,7 @@
 
         <div class="flex-1">
             {{-- Image Preview --}}
-            <div class="relative flex items-center justify-center mb-4" x-show="imagePreview">
+            <div class="relative flex items-center justify-center mb-4" x-show="imagePreview" x-cloak>
                 <img x-bind:src="imagePreview" class="object-cover w-full rounded-lg min-h-auto max-h-64 md:max-h-72" alt="Post Image Preview">
 
                 {{-- Button to Remove Image --}}

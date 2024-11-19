@@ -2,19 +2,24 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
-                <x-nav-link href="{{ route('home') }}">
+                <a href="{{ route('home') }}">
                     <h2 class="text-2xl font-bold">Barta</h2>
-                </x-nav-link>
+                </a>
             </div>
 
             {{-- Search Bar --}}
-            <x-search-bar />
+            @include('layouts.partials.search-bar')
 
             <div class="space-x-6 sm:ml-6 sm:flex sm:items-center">
+                {{-- Create Post Button --}}
                 <a href="{{ route('posts.create') }}"
                     class="text-gray-900 hover:text-white border-2 border-gray-800 hover:bg-gray-900 focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:block">
                     Create Post
                 </a>
+
+
+                {{-- Notification Dropdown --}}
+                @include('layouts.partials.notifications')
 
                 {{-- Profile dropdown  --}}
                 <div class="relative ml-3" x-data="{ open: false }">
@@ -32,7 +37,7 @@
                     </div>
 
                     {{-- Dropdown menu  --}}
-                    <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg">
+                    <div x-show="open" @click.away="open = false" x-cloak class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg">
                         @if (auth()->check())
                             <x-nav-link href="{{ route('profile.index', $user->username) }}">Your Profile</x-nav-link>
                             <x-nav-link href="{{ route('profile.edit', $user->username) }}">Edit Profile</x-nav-link>

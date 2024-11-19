@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticateUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\GlobalFeedController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/posts', PostController::class, [
         'except' => 'index',
     ]);
+
+    Route::post('/posts/{post}/like', LikeController::class)->name('posts.like')->middleware('throttle:5,1');
+
+    // notification routes
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
 
     Route::controller(AvatarController::class)->group(function () {
         Route::patch('avatar/update', 'update')->name('profile.avatar.update');

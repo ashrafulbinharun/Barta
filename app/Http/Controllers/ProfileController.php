@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     public function index(User $user)
     {
-        $posts = $user->posts()->latest()->get();
+        $posts = $user->posts()->withCount(['likes', 'comments'])->latest()->get();
 
         return view('profile.index', compact('user', 'posts'));
     }
