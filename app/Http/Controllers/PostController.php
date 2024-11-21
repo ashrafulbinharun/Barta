@@ -27,6 +27,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $post = $post->load(['user', 'comments.user'])->loadCount(['likes', 'comments']);
         return view('post.show', compact('post'));
     }
 

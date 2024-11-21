@@ -8,7 +8,7 @@
             </svg>
             @if ($unreadCount = $user->unreadNotifications->count())
                 @if ($unreadCount > 0)
-                    <span class="absolute flex items-center justify-center text-xs font-semibold text-white rounded-full size-5 bg-sky-900 -top-2 -right-2">
+                    <span class="absolute flex items-center justify-center px-3 font-semibold text-white bg-gray-800 rounded-full text-[10px] size-5 -top-2 -right-2">
                         {{ $unreadCount > 9 ? '9+' : $unreadCount }}
                     </span>
                 @endif
@@ -21,17 +21,18 @@
                 <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>
 
                 <ul class="mt-2 space-y-2">
-                    @forelse ($user->unreadNotifications as $notification)
+                    @forelse ($user->unreadNotifications->take(5) as $notification)
                         <li>
                             <a href="{{ $notification->data['url'] }}" class="block p-2 text-sm text-gray-800 border border-gray-500 rounded-md hover:bg-gray-100">
-                                {{ $notification->data['message'] }}
+                                <h4 class="inline-block font-semibold text-gray-800 hover:underline">{{ $notification->data['user_name'] }}</h4>
+                                <span>{{ $notification->data['text'] }}</span>
                                 <span class="block mt-2 text-xs text-gray-500">
                                     {{ $notification->created_at->diffForHumans() }}
                                 </span>
                             </a>
                         </li>
                     @empty
-                        <p class="mt-2 text-sm text-gray-500">No new notifications.</p>
+                        <p class="mt-2 text-sm text-gray-500">No new notifications</p>
                     @endforelse
                 </ul>
 

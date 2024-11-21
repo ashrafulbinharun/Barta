@@ -17,7 +17,7 @@
                 </form>
 
                 {{-- Comment Button --}}
-                <button type="submit" class="flex items-center gap-2 p-2 text-xs text-gray-600 rounded-full hover:text-gray-800">
+                <a href="{{ route('posts.show', $post) }}" class="flex items-center gap-2 p-2 text-xs text-gray-600 rounded-full hover:text-gray-800">
                     <span class="sr-only">Comment</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +25,7 @@
                     </svg>
                     {{-- Comment Count --}}
                     <p>{{ $post->comments_count }}</p>
-                </button>
+                </a>
             </div>
 
 

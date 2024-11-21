@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticateUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GlobalFeedController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::post('/posts/{post}/like', LikeController::class)->name('posts.like')->middleware('throttle:5,1');
+    Route::resource('posts.comments', CommentController::class, [
+        'only' => ['store', 'update', 'destroy'],
+    ]);
 
     // notification routes
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

@@ -12,7 +12,7 @@ class LikeController extends Controller
     {
         $user = auth()->user();
 
-        if (! $user || ! $user instanceof User) {
+        if ( ! $user || ! $user instanceof User) {
             return to_route('login');
         }
 
@@ -26,7 +26,9 @@ class LikeController extends Controller
         }
 
         // Like the post
-        $post->likes()->create(['user_id' => $user->id]);
+        $post->likes()->create([
+            'user_id' => $user->id,
+        ]);
 
         if ($post->user_id !== $user->id) {
             $post->user->notify(new PostLikedNotification($user, $post));

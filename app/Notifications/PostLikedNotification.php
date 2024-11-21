@@ -38,7 +38,8 @@ class PostLikedNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => "{$this->likedBy->name} liked your post",
+            'user_name' => $this->likedBy->name,
+            'text' => 'liked your post',
             'url' => route('posts.show', $this->post->id),
         ];
     }

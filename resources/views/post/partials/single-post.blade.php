@@ -34,11 +34,9 @@
                         </div>
                         {{-- Dropdown menu  --}}
                         <div x-show="open" @click.away="open = false" x-cloak
-                            class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                            class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             @can('update', $post)
-                                <a href="{{ route('posts.edit', $post) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-0">
+                                <a href="{{ route('posts.edit', $post) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Edit
                                 </a>
                             @endcan
@@ -47,8 +45,9 @@
                                 <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100" role="menuitem" tabindex="-1"
-                                        id="user-menu-item-1">Delete</button>
+                                    <button class="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100">
+                                        Delete
+                                    </button>
                                 </form>
                             @endcan
                         </div>
@@ -68,14 +67,12 @@
     {{-- Content --}}
     <div class="py-4 font-normal text-gray-700">
         <p class="mb-2">
-            {{ $showFullContent ?? false ? $post->content : str($post->content)->limit(300) }}
+            {{ str($post->content)->limit(300) }}
         </p>
 
-        @unless ($showFullContent ?? false)
-            <a href="{{ route('posts.show', $post) }}" class="text-xs text-gray-600 hover:underline">
-                View Post
-            </a>
-        @endunless
+        <a href="{{ route('posts.show', $post) }}" class="text-xs text-gray-600 hover:underline">
+            View Post
+        </a>
     </div>
 
     {{-- Post Details --}}

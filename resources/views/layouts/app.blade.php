@@ -21,7 +21,7 @@
 <body class="bg-gray-100">
     @include('layouts.partials.navbar', ['user' => auth()->user()])
 
-    <main class="container max-w-xl min-h-screen px-2 mx-auto mt-8 space-y-8 md:px-0">
+    <main class="container max-w-xl min-h-screen px-2 mx-auto mt-8 space-y-6 md:px-0">
         @include('layouts.partials.session-message')
         @yield('content')
     </main>
