@@ -7,7 +7,6 @@ use App\Models\User;
 
 class CommentPolicy
 {
-
     public function update(User $user, Comment $comment): bool
     {
         return $this->isOwner($user, $comment);

@@ -12,7 +12,7 @@ class LikeController extends Controller
     {
         $user = auth()->user();
 
-        if ( ! $user || ! $user instanceof User) {
+        if (! $user || ! $user instanceof User) {
             return to_route('login');
         }
 

@@ -42,13 +42,9 @@
                             {{ old('content', $post->content) }}
                         </x-input-textarea>
 
-                        @error('content')
-                            <x-validation-error :messages="$errors->get('content')" />
-                        @enderror
-
-                        @error('image')
-                            <x-validation-error :messages="$errors->get('image')" />
-                        @enderror
+                        @if ($errors->any())
+                            <x-validation-error :messages="$errors->all()" />
+                        @endif
                     </div>
                 </div>
             </div>

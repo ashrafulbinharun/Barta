@@ -1,13 +1,13 @@
 {{-- Comments Container --}}
-<div x-data="{ openModal: false, commentId: null, commentContent: '' }" class="flex flex-col space-y-6">
+<div x-data="{ openModal: false, commentId: null, commentContent: '' }" class="flex flex-col ">
     {{-- Comments Header --}}
-    <h1 class="text-lg font-semibold">
+    <h1 class="mb-6 text-lg font-semibold">
         {{ Str::plural('Comment', $post->comments_count) }} ({{ $post->comments_count }})
     </h1>
 
     {{-- Comments --}}
     @foreach ($post->comments as $comment)
-        <article class="min-w-full px-4 py-2 mx-auto bg-white border-2 border-black divide-y rounded-lg shadow max-w-none sm:px-6">
+        <article class="min-w-full px-4 py-2 mx-auto mb-6 bg-white border-2 border-black divide-y rounded-lg shadow max-w-none sm:px-6">
             <div class="py-4">
                 <header>
                     <div class="flex items-center justify-between">
@@ -84,16 +84,16 @@
     @endforeach
 
     {{-- Edit Modal --}}
-    <div x-show="openModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
+    <div x-show="openModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center mt-0 bg-gray-500 bg-opacity-75">
         <div class="w-full max-w-lg p-6 bg-white rounded shadow-lg">
             <h2 class="mb-4 text-lg font-semibold">Edit Comment</h2>
-            <form :action="'{{ route('posts.comments.update', [$post->id, '']) }}/' + editingCommentId" method="POST">
+            <form :action="'{{ route('posts.comments.update', [$post->id, '']) }}/' + commentId" method="POST">
                 @csrf
                 @method('PUT')
                 <div>
                     <x-input-textarea name="comment" placeholder="Write a comment..." rows="1" x-model="commentContent"></x-input-textarea>
 
-                    <x-validation-error :messages="$errors->get('comment')" <div class="flex justify-end gap-2 mt-4">
+                    <x-validation-error :messages="$errors->get('comment')" />
                 </div>
 
                 <div class="flex justify-end gap-4 mt-4">

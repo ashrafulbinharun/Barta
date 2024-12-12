@@ -24,7 +24,7 @@
                 <div class="flex self-center flex-shrink-0" x-data="{ open: false }">
                     <div class="relative inline-block text-left">
                         <div>
-                            <button @click="open = !open" type="button" class="flex items-center p-2 -m-2 text-gray-400 rounded-full hover:text-gray-600" id="menu-0-button">
+                            <button @click="open = !open" type="button" class="flex items-center p-2 -m-2 text-gray-400 rounded-full hover:text-gray-600">
                                 <span class="sr-only">Open options</span>
                                 <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z">
@@ -32,6 +32,7 @@
                                 </svg>
                             </button>
                         </div>
+
                         {{-- Dropdown menu  --}}
                         <div x-show="open" @click.away="open = false" x-cloak
                             class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -69,7 +70,6 @@
         <p class="mb-2">
             {{ str($post->content)->limit(300) }}
         </p>
-
         <a href="{{ route('posts.show', $post) }}" class="text-xs text-gray-600 hover:underline">
             View Post
         </a>
