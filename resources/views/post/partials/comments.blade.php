@@ -87,7 +87,7 @@
     <div x-show="openModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center mt-0 bg-gray-500 bg-opacity-75">
         <div class="w-full max-w-lg p-6 bg-white rounded shadow-lg">
             <h2 class="mb-4 text-lg font-semibold">Edit Comment</h2>
-            <form :action="'{{ route('posts.comments.update', [$post->id, '']) }}/' + commentId" method="POST">
+            <form :action="`${baseRoute}/${commentId}`" method="POST" x-data="{ baseRoute: '{{ route('posts.comments.update', [$post->id, '']) }}' }">
                 @csrf
                 @method('PUT')
                 <div>
