@@ -58,7 +58,7 @@ Follow these instructions to set up the project.
     npm run dev
     ```
 
-    ## Testing
+## Testing
 
 Follow these steps to set up and run the tests.
 
@@ -78,9 +78,9 @@ Follow these steps to set up and run the tests.
 
 3.  **Create the `test.sqlite` file:**
 
-        ```bash
-        touch database/test.sqlite
-        ```
+    ```bash
+    touch database/test.sqlite
+    ```
 
 4.  **Run database migrations with seeding for the testing environment:**
 
